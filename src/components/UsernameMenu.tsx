@@ -12,6 +12,7 @@ import { Button } from "./ui/button";
 
 const UsernameMenu = () => {
   const { user, logout } = useAuth0();
+  const isAdmin = user?.isAdmin;
 
   return (
     <DropdownMenu>
@@ -21,12 +22,15 @@ const UsernameMenu = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>
+
+          {isAdmin &&(
           <Link
             to="/manage-restaurant"
             className="font-bold hover:text-orange-500"
           >
             Manage Restaurant
           </Link>
+          )}
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Link to="/user-profile" className="font-bold hover:text-orange-500">
