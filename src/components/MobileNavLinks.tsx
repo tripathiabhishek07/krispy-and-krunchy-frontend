@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useGetMyUser } from "../api/MyUserApi"; 
 
 const MobileNavLinks = () => {
-  const { logout, user } = useAuth0();
-  const isAdmin = user?.isAdmin;
+  const { logout} = useAuth0();
+  
+  const { currentUser, isLoading } = useGetMyUser();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const isAdmin = currentUser?.isAdmin;
   return (
     <>
       <Link
